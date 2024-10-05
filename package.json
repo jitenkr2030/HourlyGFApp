@@ -1,0 +1,48 @@
+{
+  "name": "hourlygf",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-masked-view/masked-view": "^0.2.7",
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
+    "axios": "^0.26.0",
+    "react": "18.0.0",
+    "react-native": "0.71.0",
+    "react-native-gesture-handler": "^2.20.0",
+    "react-native-image-picker": "^4.8.4",
+    "react-native-reanimated": "^2.17.0",
+    "react-native-safe-area-context": "^3.4.1",
+    "react-native-screens": "^3.34.0",
+    "react-native-vector-icons": "^9.1.0",
+    "react-redux": "^8.0.4",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/runtime": "^7.15.5",
+    "babel-jest": "^27.0.6",
+    "eslint": "^8.3.0",
+    "eslint-plugin-react": "^7.28.0",
+    "jest": "^27.0.6"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "keywords": [
+    "react-native",
+    "hourlygf",
+    "mobile-app"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
