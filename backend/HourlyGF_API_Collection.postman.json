@@ -1,0 +1,348 @@
+{
+  "info": {
+    "name": "HourlyGF API",
+    "description": "Complete API collection for HourlyGF backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"9876543210\",\n  \"password\": \"password123\",\n  \"gender\": \"male\",\n  \"dob\": \"1995-01-01\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailOrPhone\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": "{{baseUrl}}/auth/verify-otp",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"otp\": \"123456\",\n  \"type\": \"email\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/auth/logout"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/users/profile"
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": "{{baseUrl}}/users/profile",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Updated\",\n  \"bio\": \"Hello, I'm John!\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Companions",
+      "item": [
+        {
+          "name": "Get All Companions",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/companions?page=1&limit=20"
+          }
+        },
+        {
+          "name": "Get Companion by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/companions/:id"
+          }
+        },
+        {
+          "name": "Get Nearby Companions",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/companions/nearby?lat=28.7041&lng=77.1025&maxDistance=50000"
+          }
+        },
+        {
+          "name": "Filter Companions",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": "{{baseUrl}}/companions/filter",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ageRange\": {\"min\": 21, \"max\": 30},\n  \"priceRange\": {\"min\": 500, \"max\": 2000},\n  \"rating\": 4\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Matches",
+      "item": [
+        {
+          "name": "Like Companion",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/matches/like/:companionId"
+          }
+        },
+        {
+          "name": "Super Like Companion",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/matches/super-like/:companionId"
+          }
+        },
+        {
+          "name": "Get Matches",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/matches"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": "{{baseUrl}}/bookings",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companionId\": \"companion_id_here\",\n  \"bookingDate\": \"2025-12-01\",\n  \"startTime\": \"18:00\",\n  \"endTime\": \"20:00\",\n  \"durationHours\": 2\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Bookings",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/bookings"
+          }
+        },
+        {
+          "name": "Get Upcoming Bookings",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/bookings/upcoming"
+          }
+        },
+        {
+          "name": "Cancel Booking",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": "{{baseUrl}}/bookings/:id/cancel",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Change of plans\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Payment Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": "{{baseUrl}}/payments/create-order",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingId\": \"booking_id_here\",\n  \"gateway\": \"razorpay\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Verify Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": "{{baseUrl}}/payments/verify",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paymentId\": \"pay_xxx\",\n  \"orderId\": \"order_xxx\",\n  \"signature\": \"signature_xxx\",\n  \"gateway\": \"razorpay\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Payment Methods",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/payments/methods"
+          }
+        },
+        {
+          "name": "Get Transactions",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/payments/transactions"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Get All Chats",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/chats"
+          }
+        },
+        {
+          "name": "Get or Create Chat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": "{{baseUrl}}/chats",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"participantId\": \"user_id_here\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Messages",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}],
+            "url": "{{baseUrl}}/chats/:chatId/messages"
+          }
+        },
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": "{{baseUrl}}/chats/:chatId/messages",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messageText\": \"Hello!\",\n  \"messageType\": \"text\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Create Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{token}}"}
+            ],
+            "url": "{{baseUrl}}/reviews",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingId\": \"booking_id_here\",\n  \"companionId\": \"companion_id_here\",\n  \"rating\": 5,\n  \"reviewText\": \"Great experience!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Companion Reviews",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reviews/:companionId"
+          }
+        }
+      ]
+    }
+  ]
+}
